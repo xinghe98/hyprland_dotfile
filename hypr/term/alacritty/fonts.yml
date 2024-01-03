@@ -6,7 +6,7 @@
 font:
   # Normal font face
   normal:
-    family: "Hack Nerd Font"
+    family: "MonacoB Nerd Font"
 
   # Bold font face
   bold:
@@ -21,6 +21,4 @@ font:
     family: "Hack Nerd Font"
 
   # Point size
-  size: 14
-
-
+  size: 12

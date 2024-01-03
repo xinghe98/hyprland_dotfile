@@ -28,7 +28,7 @@ icons[cancel]="\u00d7"
 
 declare -A actions
 #actions[lockscreen]="sh $HOME/.config/sway/swaylock.sh"
-actions[logout]="i3-msg exit, mode \"default\""
+actions[logout]="hyprctl dispatch exit"
 #actions[logout]="loginctl terminate-session ${XDG_SESSION_ID-}"
 actions[suspend]="systemctl suspend"
 actions[hibernate]="systemctl hibernate"

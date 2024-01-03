@@ -1,0 +1,14 @@
+[font]
+size = 14
+
+[font.bold]
+family = "MonacoB Nerd Font"
+
+[font.bold_italic]
+family = "MonacoB Nerd Font"
+
+[font.italic]
+family = "MonacoB Nerd Font"
+
+[font.normal]
+family = "MonacoB Nerd Font"
