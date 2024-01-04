@@ -8,12 +8,6 @@
 DIR="${HOME}/.config/hypr"
 SCRIPTS="${DIR}/scripts"
 
-if [[ -f "${DIR}/.current" ]]; then
-	source ${DIR}/.current
-else
-	source ${DIR}/custom/theme.sh
-fi
-
 if [[ ! "${hypr_lock_timeout}" ]]; then
 	local hypr_lock_timeout=600
 fi
@@ -44,12 +38,6 @@ set_xdg_desktop() {
 	/usr/lib/xdg-desktop-portal &
 }
 
-lock_manager() {
-	killall -9 swayidle
-	swayidle -w \
-		timeout ${hypr_lock_timeout} "hyprctl dispatcher dpms off && bash ${SCRIPTS}/hyprlock" &
-}
-
 start_always() {
 	## this function will exec always
 
@@ -61,14 +49,6 @@ start_always() {
 		/usr/lib/xfce-polkit/xfce-polkit &
 	fi
 
-	## 壁纸
-	killall -9 hyprpaper
-
-	if [[ "${hypr_dis_random_logo}" == "true" ]]; then
-		hyprpaper &
-	fi
-
-	hyprctl setcursor ${XCURSOR_THEME} ${XCURSOR_SIZE}
 
 }
 
