@@ -5,5 +5,7 @@ configuration {
   modi: "window,drun,ssh,run,filebrowser";
 }
 
-@theme "nord"
+//@theme "nord"
 
+//@theme "/home/lcg/.local/share/rofi/themes/rounded-green-dark.rasi"
+@theme "/home/lcg/.local/share/rofi/themes/squared-everforest.rasi"

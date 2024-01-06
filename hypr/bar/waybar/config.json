@@ -23,7 +23,7 @@
 	"hyprland/workspaces": {
 		"on-click": "activate",
 		"all-outputs": true,
-		"active-only": false,
+		"active-only": true,
 		"format": "{icon}",
 		"format-icons": {
 			"1": "",
@@ -122,7 +122,7 @@
 		"interval": 1,
 		"interface": "enp5s0", // (Optional) To force the use of this interface
 		"format-wifi": " ",
-		"format-ethernet": "󰇚 {bandwidthUpBits:3}  󰕒 {bandwidthDownBits:3}",
+		"format-ethernet": "󰇚 {bandwidthDownBits:3}  󰕒 {bandwidthUpBits:3}",
 		"tooltip-format": "{ifname} via {gwaddr} ",
 		"tooltip": false,
 		"format-linked": "{ifname} (No IP)  ",

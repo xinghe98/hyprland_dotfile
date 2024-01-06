@@ -68,29 +68,18 @@ button:hover {
 	background-color: #9bcd9b;
 }
 
-#workspaces button.visible label {
-	color: #311b92;
+#workspaces button label {
+	color: rgba(255, 127, 0, 1);
 }
-
-#workspaces button:hover {
-	background: transparent;
-	border: none;
+#workspaces button.persistent label {
+	color: rgba(255, 255, 255, 1);
 }
-
 #workspaces button.active label {
 	color: #9bcd9b;
 }
-
-#workspaces button.empty label {
-	color: red;
-}
-
-#workspaces button.label {
-	color: rgba(255, 127, 0, 1);
-}
-
-#workspaces button.urgent {
-	background-color: #ffa07a;
+#workspaces button:hover {
+	background: transparent;
+	border: none;
 }
 
 #mode {
