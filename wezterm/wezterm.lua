@@ -30,7 +30,7 @@ local color_scheme = "Nightfox"
 return {
 	default_cursor_style = "BlinkingUnderline",
 	font = wezterm.font('MonacoB Nerd Font'),
-	window_background_opacity = 0.3,
+	window_background_opacity = 0.7,
 	macos_window_background_blur = 20,
 	font_size = 14,
 	allow_square_glyphs_to_overflow_width = "Never",
