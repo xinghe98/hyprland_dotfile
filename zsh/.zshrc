@@ -139,6 +139,7 @@ source $ZDOTDIR/.zsh/keymaps.zsh
 # 环境变量
 export PATH="/home/lcg/.local/share/bob/nvim-bin:$PATH"
 export dirs="~/MyTools/resources/dir.list"
+export EDITOR="nvim"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

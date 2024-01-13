@@ -1,0 +1,40 @@
+import = ["${HOME}/.config/alacritty/themes/github_dark.toml"]
+
+[colors]
+
+[cursor]
+unfocused_hollow = false
+
+[cursor.style]
+blinking = "Always"
+shape = "Underline"
+
+[cursor.vi_mode_style]
+blinking = "Always"
+shape = "Underline"
+
+
+[env]
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "MonacoB Nerd Font"
+
+[font.offset]
+x = 1
+y = 2
+
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Super"
+
+[window]
+decorations = "None"
+opacity = 0.8
+blur = true
+padding = { x = 20 , y = 20}
+dynamic_padding = true
+
