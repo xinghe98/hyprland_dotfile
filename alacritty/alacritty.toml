@@ -17,7 +17,7 @@ shape = "Underline"
 [env]
 
 [font]
-size = 14.0
+size = 13.0
 
 [font.normal]
 family = "MonacoB Nerd Font"
