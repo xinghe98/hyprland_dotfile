@@ -1,0 +1,14 @@
+#!/bin/bash
+
+ICONS='Tela'
+THEME='Catppuccin-Macchiato-Standard-Green-Dark'
+FONT='MonacoB Nerd Font'
+SCHEMA='gsettings set org.gnome.desktop.interface'
+
+apply_themes(){
+	${SCHEMA} icon-theme "$ICONS"
+	${SCHEMA} gtk-theme "$THEME"
+	${SCHEMA} font-name "$FONT"
+}
+
+apply_themes
