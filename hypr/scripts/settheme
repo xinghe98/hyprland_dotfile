@@ -2,7 +2,7 @@
 
 ICONS='Tela'
 THEME='Catppuccin-Macchiato-Standard-Green-Dark'
-FONT='MonacoB Nerd Font'
+FONT='MonacoB Nerd Font,  10'
 SCHEMA='gsettings set org.gnome.desktop.interface'
 
 apply_themes(){
