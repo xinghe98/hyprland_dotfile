@@ -95,12 +95,12 @@
 	"clock": {
 		"tooltip": false,
 		"interval": 1,
-		"format": " {:%F %T}"
+		"format": "󰥔 {:%F %T}"
 	},
 
 	"cpu": {
 		"interval": 3,
-		"format": " {usage}%",
+		"format": " {usage}%",
 		"tooltip": false,
 		"on-click": "alacritty -e gotop"
 	},
@@ -108,7 +108,7 @@
 	"memory": {
 		"interval": 3,
 		"tooltip": false,
-		"format": " {}%",
+		"format": "󰍛 {}%",
 		"on-click": "alacritty -e htop"
 	},
 
