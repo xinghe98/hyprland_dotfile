@@ -14,7 +14,7 @@ wallpaper_path="~/.local/share/wallpapers/wallhaven-7p3we9.png"
 ## 是否从壁纸获取颜色
 auto_color="true"
 ## 颜色主题模式(light / dark)
-color_scheme="dark"
+color_scheme="light"
 
 #########################
 ## Menu

@@ -1,4 +1,4 @@
-import = ["${HOME}/.config/alacritty/themes/github_dark.toml"]
+# import = ["${HOME}/.config/alacritty/themes/github_dark.toml"]
 
 [colors]
 
