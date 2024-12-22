@@ -151,6 +151,7 @@ export EDITOR="nvim"
 # eval "$(pyenv virtualenv-init -)"
 
 alias vi='nvim'
+alias ya='yazi'
 alias sudovim='sudoedit'
 alias vizsh="vim $HOME/.zshrc"
 alias vibash="vim $HOME/.bashrc"
