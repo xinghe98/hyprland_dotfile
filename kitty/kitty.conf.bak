@@ -18,7 +18,7 @@ strip_trailing_spaces           always
 
 # Cursor
 cursor_shape                    block
-cursor_blink_interval           0
+cursor_trail          3
 
 # Window layout
 window_border_width             1px
@@ -95,6 +95,8 @@ active_tab_font_style   bold
 # inactive_tab_background #12121e
 inactive_tab_font_style normal
 
+background_opacity 0.5
+
 # ####### Keyboard Shortcuts #######
 #
 # ## Misc
@@ -124,6 +126,7 @@ map alt+n neighboring_window left
 map alt+e neighboring_window bottom
 map alt+u neighboring_window top
 map alt+i neighboring_window right
+map alt+w  close_window
 map alt+[ previous_tab
 map alt+] next_tab
 #
@@ -150,11 +153,8 @@ include current-theme.conf
 # END_KITTY_THEME
 
 # BEGIN_KITTY_FONTS
-#FiraCode Nerd Font Mono
-#Consolas Nerd Font
-font_family      Consolas Nerd Font
-# font_family      family="Monaco NF"
+font_family      family="LigaConsolas Nerd Font"
 bold_font        auto
-italic_font      Victor Mono
-bold_italic_font Victor Mono
+italic_font      auto
+bold_italic_font auto
 # END_KITTY_FONTS
