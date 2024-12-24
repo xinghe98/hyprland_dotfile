@@ -14,7 +14,7 @@ launch_bar() {
 
 	while pgrep -u $UID -x waybar >/dev/null; do sleep 1; done
 
-	waybar -c "${CUR_DIR}"/config.json -s "${CUR_DIR}"/style.css &
+	waybar -c "${CUR_DIR}"/config.jsonc -s "${CUR_DIR}"/style.css &
 }
 
 launch_bar

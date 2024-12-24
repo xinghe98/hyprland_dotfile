@@ -4,18 +4,21 @@
   // "height": 37, // Waybar height (to be removed for auto height)
   // "width": 1280, // Waybar width
   // "margin": 10,
+  "mod": "dock",
+  "height": 31,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "reload_style_on_change": true,
   "spacing": 0, // Gaps between modules (4px)
   // Choose the order of the modules
-  "margin-top": 3,
-  "margin-left": 3,
-  "margin-right": 3,
   "modules-left": [
     "custom/home",
     "cpu",
     "memory",
     "hyprland/workspaces",
     "wlr/taskbar",
-    "hyprland/window"
+    "hyprland/window",
   ],
   "modules-center": ["custom/launcher"],
   "modules-right": ["network", "pulseaudio", "clock", "custom/power", "tray"],
@@ -34,7 +37,7 @@
       "6": "",
       "7": "",
       "8": "",
-      "default": ""
+      "default": "",
     },
     "sort-by": "number",
     "persistent-workspaces": {
@@ -45,24 +48,23 @@
       "5": [],
       "6": [],
       "7": [],
-      "8": []
-    }
+      "8": [],
+    },
   },
 
   "wlr/taskbar": {
     "format": "{icon}",
-    "tooltip": false,
-    "all-outputs": "false",
-    // "icon-size": 40,
-    "icon-theme": "ePapirus",
+    "rotate": 0,
+    "icon-size": 18,
+    "icon-theme": "Tela-circle-dracula",
+    "spacing": 0,
     "tooltip-format": "{title}",
     "on-click": "activate",
     "on-click-middle": "close",
-    "ignore-list": ["Alacritty", "kitty", "org.wezfurlong.wezterm"],
-
+    "ignore-list": ["Alacritty"],
     "app_ids-mapping": {
-      "firefoxdeveloperedition": "firefox-developer-edition"
-    }
+      "firefoxdeveloperedition": "firefox-developer-edition",
+    },
   },
 
   "mpd": {
@@ -72,51 +74,76 @@
     "unknown-tag": "N/A",
     "interval": 2,
     "consume-icons": {
-      "on": " "
+      "on": " ",
     },
     "random-icons": {
       "off": "<span color=\"#f53c3c\"></span> ",
-      "on": " "
+      "on": " ",
     },
     "repeat-icons": {
-      "on": " "
+      "on": " ",
     },
     "single-icons": {
-      "on": "1 "
+      "on": "1 ",
     },
     "state-icons": {
       "paused": "",
-      "playing": ""
+      "playing": "",
     },
     "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)"
+    "tooltip-format-disconnected": "MPD (disconnected)",
   },
 
   "clock": {
-    "tooltip": false,
-    "interval": 1,
-    "format": "󰥔  {:%F %T}"
+    "format": "{:%I:%M %p}",
+    "rotate": 0,
+    "format-alt": "{:%R 󰃭 %d·%m·%y}",
+    "tooltip-format": "<span>{calendar}</span>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b>{}</b></span>",
+      },
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+    },
+  },
+
+  "tray": {
+    "icon-size": 18,
+    "rotate": 0,
+    "spacing": 5,
   },
 
   "cpu": {
     "interval": 3,
     "format": "  {usage}%",
     "tooltip": false,
-    "on-click": "kitty -e gotop"
+    "on-click": "kitty -e gotop",
   },
 
   "memory": {
     "interval": 3,
     "tooltip": false,
     "format": "󰍛  {}%",
-    "on-click": "kitty -e htop"
+    "on-click": "kitty -e htop",
   },
 
   "backlight": {
     // "device": "acpi_video1",
     "format": "{icon}{percent}%",
     "tooltip": false,
-    "format-icons": [" "]
+    "format-icons": [" "],
   },
   "network": {
     "interval": 1,
@@ -127,7 +154,7 @@
     "tooltip": false,
     "format-linked": "{ifname} (No IP)  ",
     "format-disconnected": "⚠ Disconnected ",
-    "on-click": "kitty -e iwctl"
+    "on-click": "kitty -e iwctl",
   },
   "pulseaudio": {
     "scroll-step": 1, // %, can be a float
@@ -144,29 +171,29 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": [""]
+      "default": [""],
     },
     "on-click": "pavucontrol",
     "on-click-right": "volumectl toggle-mute",
-    "tooltip": false
+    "tooltip": false,
   },
 
   "custom/launcher": {
     "format": " ",
     "tooltip": false,
-    "on-click-right": "killall rofi"
+    "on-click-right": "killall rofi",
   },
 
   "custom/home": {
     "format": " ",
     "tooltip": false,
-    "on-click": "kitty"
+    "on-click": "kitty",
   },
 
   "custom/power": {
     "tooltip": false,
     "format": " ",
     "on-click": "bash ~/.config/rofi/powermenu.sh",
-    "on-click-right": "killall rofi"
-  }
+    "on-click-right": "killall rofi",
+  },
 }
