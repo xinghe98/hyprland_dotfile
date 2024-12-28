@@ -1,29 +1,24 @@
 {
-  "layer": "top", // Waybar at top layer
-  "position": "top", // Waybar position (top|bottom|left|right)
-  // "height": 37, // Waybar height (to be removed for auto height)
-  // "width": 1280, // Waybar width
-  // "margin": 10,
-  "mod": "dock",
-  "height": 31,
-  "exclusive": true,
-  "passthrough": false,
-  "gtk-layer-shell": true,
-  "reload_style_on_change": true,
-  "spacing": 0, // Gaps between modules (4px)
-  // Choose the order of the modules
-  "modules-left": [
-    "custom/home",
+  "layer": "top",
+  "position": "bottom",
+  "height": 12,
+  "modules-left": ["hyprland/workspaces", "wlr/taskbar", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "custom/arrow-light-on-bg-left",
+    "network",
+    "custom/arrow-light-on-dark-left",
     "cpu",
+    "custom/arrow-dark-on-light-left",
     "memory",
-    "hyprland/workspaces",
-    "wlr/taskbar",
-    "hyprland/window",
+    "custom/arrow-light-on-dark-left",
+    "temperature",
+    "pulseaudio",
+    "tray",
   ],
-  "modules-center": ["custom/launcher"],
-  "modules-right": ["network", "pulseaudio", "clock", "custom/power", "tray"],
-  // Modules configuration
+
   "hyprland/workspaces": {
+    "disable-scroll": true,
     "on-click": "activate",
     "all-outputs": true,
     "active-only": true,
@@ -61,101 +56,36 @@
     "tooltip-format": "{title}",
     "on-click": "activate",
     "on-click-middle": "close",
-    "ignore-list": ["Alacritty"],
+    "ignore-list": ["Alacritty", "kitty"],
     "app_ids-mapping": {
       "firefoxdeveloperedition": "firefox-developer-edition",
     },
   },
 
-  "mpd": {
-    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-    "format-disconnected": "Disconnected ",
-    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-    "unknown-tag": "N/A",
-    "interval": 2,
-    "consume-icons": {
-      "on": " ",
-    },
-    "random-icons": {
-      "off": "<span color=\"#f53c3c\"></span> ",
-      "on": " ",
-    },
-    "repeat-icons": {
-      "on": " ",
-    },
-    "single-icons": {
-      "on": "1 ",
-    },
-    "state-icons": {
-      "paused": "",
-      "playing": "",
-    },
-    "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)",
-  },
-
   "clock": {
-    "format": "{:%I:%M %p}",
-    "rotate": 0,
-    "format-alt": "{:%R 󰃭 %d·%m·%y}",
-    "tooltip-format": "<span>{calendar}</span>",
+    "format": " {:%H:%M}",
+    "format-alt": "{:%A, %d %b, %Y}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "month",
       "mode-mon-col": 3,
+      "weeks-pos": "left",
       "on-scroll": 1,
-      "on-click-right": "mode",
       "format": {
-        "months": "<span color='#ffead3'><b>{}</b></span>",
-        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b>{}</b></span>",
+        "months": "<span color='#d4be98'><b>{}</b></span>",
+        "days": "<span color='#d4be98'><b>{}</b></span>",
+        "weeks": "<span color='#a9b665'><b>W{}</b></span>",
+        "weekdays": "<span color='#d8a657'><b>{}</b></span>",
+        "today": "<span color='#e78a4e'><b><u>{}</u></b></span>",
       },
     },
     "actions": {
-      "on-click-right": "mode",
-      "on-click-forward": "tz_up",
-      "on-click-backward": "tz_down",
+      "on-click-middle": "mode",
       "on-scroll-up": "shift_up",
       "on-scroll-down": "shift_down",
     },
   },
 
-  "tray": {
-    "icon-size": 18,
-    "rotate": 0,
-    "spacing": 5,
-  },
-
-  "cpu": {
-    "interval": 3,
-    "format": "  {usage}%",
-    "tooltip": false,
-    "on-click": "kitty -e gotop",
-  },
-
-  "memory": {
-    "interval": 3,
-    "tooltip": false,
-    "format": "󰍛  {}%",
-    "on-click": "kitty -e htop",
-  },
-
-  "backlight": {
-    // "device": "acpi_video1",
-    "format": "{icon}{percent}%",
-    "tooltip": false,
-    "format-icons": [" "],
-  },
-  "network": {
-    "interval": 1,
-    "interface": "enp10s0", // (Optional) To force the use of this interface
-    "format-wifi": " ",
-    "format-ethernet": "󰇚 {bandwidthDownBits:3}  󰕒 {bandwidthUpBits:3}",
-    "tooltip-format": "{ifname} via {gwaddr} ",
-    "tooltip": false,
-    "format-linked": "{ifname} (No IP)  ",
-    "format-disconnected": "⚠ Disconnected ",
-    "on-click": "kitty -e iwctl",
-  },
   "pulseaudio": {
     "scroll-step": 1, // %, can be a float
     "format": "{icon} {volume}%",
@@ -178,22 +108,142 @@
     "tooltip": false,
   },
 
-  "custom/launcher": {
-    "format": " ",
+  "network": {
+    "interval": 1,
+    "interface": "enp10s0", // (Optional) To force the use of this interface
+    "format-wifi": " ",
+    "format-ethernet": "󰇚 {bandwidthDownBits:3}  󰕒 {bandwidthUpBits:3}",
+    "tooltip-format": "{ifname} via {gwaddr} ",
     "tooltip": false,
-    "on-click-right": "killall rofi",
+    "format-linked": "{ifname} (No IP)  ",
+    "format-disconnected": "⚠ Disconnected ",
+    "on-click": "kitty -e iwctl",
   },
 
-  "custom/home": {
-    "format": " ",
+  "cpu": {
+    "interval": 3,
+    "format": "   {usage}%",
     "tooltip": false,
-    "on-click": "kitty",
+    "on-click": "kitty -e gotop",
   },
 
-  "custom/power": {
+  "memory": {
+    "interval": 3,
     "tooltip": false,
-    "format": " ",
-    "on-click": "bash ~/.config/rofi/powermenu.sh",
-    "on-click-right": "killall rofi",
+    "format": "   {}%",
+    "on-click": "kitty -e htop",
+    "tooltip-format": "RAM: {used}GB/{total}GB\nSwap: {swapUsed}GB/{swapAvail}GB",
+  },
+
+  "temperature": {
+    "tooltip": false,
+    "critical-threshold": 80,
+    "format": "{temperatureC}°{icon}",
+    "format-icons": [" ", "", " "],
+  },
+
+  "backlight": {
+    "tooltip": false,
+    "format": "{percent}% {icon}",
+    "format-icons": ["󰃞 ", "󰃟 ", "󰃠 "],
+  },
+
+  "battery#bat1": {
+    "bat": "BAT0",
+    "adapter": "AC",
+    "interval": 10,
+    "full-at": 99,
+    "states": {
+      "full": 100,
+      "good": 99,
+      "empty": 5,
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-empty": " {capacity}%",
+    "format-full": " {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+  },
+
+  "battery#bat2": {
+    "bat": "BAT1",
+    "adapter": "AC",
+    "interval": 10,
+    "full-at": 99,
+    "states": {
+      "full": 100,
+      "good": 99,
+      "empty": 5,
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-empty": " {capacity}%",
+    "format-full": " {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+  },
+
+  "sway/language": {
+    "format": "{shortDescription}",
+    "tooltip": false,
+  },
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": " ",
+      "none": " ",
+      "dnd-notification": "<span foreground='#ea6962'></span>",
+      "dnd-none": "<span foreground='#ea6962'> </span>",
+      "inhibited-notification": " ",
+      "inhibited-none": " ",
+      "dnd-inhibited-notification": "<span foreground='#ea6962'> </span>",
+      "dnd-inhibited-none": "<span foreground='#ea6962'> </span>",
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true,
+  },
+
+  "tray": {
+    "tooltip": false,
+    "icon-size": 18,
+    "rotate": 0,
+    "spacing": 10,
+  },
+
+  "custom/arrow-light-on-bg-left": {
+    "tooltip": false,
+    "format": "",
+  },
+
+  "custom/arrow-dark-on-light-left": {
+    "tooltip": false,
+    "format": "",
+  },
+
+  "custom/arrow-light-on-dark-left": {
+    "tooltip": false,
+    "format": "",
+  },
+
+  "custom/arrow-light-on-bg-right": {
+    "tooltip": false,
+    "format": "",
+  },
+
+  "custom/arrow-dark-on-light-right": {
+    "tooltip": false,
+    "format": "",
+  },
+
+  "custom/arrow-light-on-dark-right": {
+    "tooltip": false,
+    "format": "",
   },
 }
