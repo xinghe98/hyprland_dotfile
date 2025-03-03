@@ -145,6 +145,7 @@ export PATH=${ANDROID_HOME}/tools:${PATH}
 export PATH=${ANDROID_HOME}/emulator:${PATH}
 export PATH=${ANDROID_HOME}/platform-tools:${PATH}
 export EDITOR="nvim"
+export PATH=$PATH:$HOME/go/bin
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
