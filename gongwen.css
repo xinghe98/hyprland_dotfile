@@ -1,0 +1,132 @@
+/* ===== 党政公文基础框架 ===== */
+:root {
+  --gh-border: #e1e4e8; /* GitHub风格边框色 */
+  --gh-bg: #f6f8fa; /* GitHub代码块背景 */
+  --gh-link: #0366d6; /* GitHub链接蓝色 */
+}
+
+/* 页面核心布局 */
+body {
+  font-family: "仿宋_GB2312", "FangSong", SimSun, serif;
+  font-size: 16pt; /* 三号字 */
+  line-height: 28pt; /* 固定28磅行距 */
+  max-width: 680px; /* 每行约28个汉字 */
+  margin: 2rem auto;
+  padding: 0 20px;
+  color: #24292e; /* GitHub文字色 */
+  hyphens: auto; /* 自动断词 */
+}
+
+/* ===== 标题层级 (GB/T 9704标准) ==== */
+h1 {
+  font-family: "方正小标宋简体", "SimSun", serif;
+  font-size: 22pt; /* 二号字 */
+  text-align: center;
+  margin: 36pt 0 24pt;
+  color: #1a1a1a; /* 深灰 */
+  border-bottom: none !important; /* 禁用GitHub默认下划线 */
+}
+
+h2 {
+  font-family: "黑体", "SimHei", sans-serif;
+  font-size: 16pt; /* 三号字 */
+  margin: 24pt 0 16pt;
+  color: #2a2a2a;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--gh-border); /* GitHub式分隔线 */
+}
+
+h3 {
+  font-family: "楷体_GB2312", "KaiTi", serif;
+  font-size: 16pt;
+  margin: 20pt 0 12pt;
+  color: #3a3a3a;
+}
+
+h4 {
+  font-family: "仿宋_GB2312", serif;
+  font-weight: bold;
+  margin: 16pt 0 8pt;
+  color: #4a4a4a;
+}
+
+/* ===== 公文正文样式 ==== */
+p {
+  text-indent: 2em; /* 首行缩进2字符 */
+  margin: 0 0 28pt 0; /* 28磅段落间距 */
+  text-align: justify; /* 两端对齐 */
+}
+
+/* ===== GitHub风格增强设计 ==== */
+/* 链接样式 */
+a {
+  color: var(--gh-link);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(3, 102, 214, 0.3);
+}
+a:hover {
+  background: #f8f9fa;
+}
+
+/* 代码块 (保持技术内容可读性) */
+pre,
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  background: var(--gh-bg);
+  border-radius: 3px;
+  border: 1px solid var(--gh-border);
+}
+pre {
+  padding: 16px;
+  overflow: auto;
+}
+code {
+  padding: 0.2em 0.4em;
+}
+
+/* 表格 (兼容公文严谨性) */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 28pt 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* GitHub式阴影 */
+}
+td,
+th {
+  border: 1px solid var(--gh-border);
+  padding: 6px 13px; /* GitHub单元格内距 */
+  text-align: left;
+}
+th {
+  background: #f6f8fa;
+  font-family: "黑体", sans-serif;
+}
+
+/* ===== 响应式优化 ==== */
+@media (max-width: 768px) {
+  body {
+    max-width: 90%;
+    padding: 0 10px;
+    font-size: 15pt; /* 移动端略缩小字号 */
+  }
+  h1 {
+    font-size: 20pt;
+  }
+}
+
+/* ===== 公文特殊元素 ==== */
+/* 落款与日期 */
+.signature {
+  font-family: "楷体_GB2312", serif;
+  text-align: right;
+  margin-top: 56pt;
+}
+/* 页码模拟 */
+@media print {
+  @page {
+    margin: 3.7cm 2.8cm 3.5cm 2.6cm;
+  }
+  body {
+    max-width: 100%;
+  } /* 打印时铺满版心 */
+}
