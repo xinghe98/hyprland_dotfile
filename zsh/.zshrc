@@ -139,6 +139,7 @@ source $ZDOTDIR/.zsh/keymaps.zsh
 # 环境变量
 export PATH="/home/lcg/.local/share/bob/nvim-bin:$PATH"
 export PATH="/home/xinghe/flutter-bin/flutter/bin:$PATH"
+export DEEPSEEK_KEY="sk-3594604d314143e59beda553f86a7b73"
 export dirs="~/MyTools/resources/dir.list"
 export ANDROID_HOME=${HOME}/Android/Sdk
 export PATH=${ANDROID_HOME}/tools:${PATH}
