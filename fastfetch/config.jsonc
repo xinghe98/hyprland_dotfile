@@ -1,0 +1,161 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    
+    // 显示设置
+    "display": {
+        "separator": " -> ",
+        "color": {
+            "keys": "blue",
+            "title": "cyan"
+        }
+    },
+    
+    // Logo 设置
+    "logo": {
+        "type": "auto",
+        "padding": {
+            "top": 1,
+            "left": 2,
+            "right": 2
+        },
+        "printRemaining": true
+    },
+    
+    // 模块配置
+    "modules": [
+        // 顶部边框和标题
+        {
+            "type": "custom",
+            "format": "\u001b[34m┌─────────────────────────────────────────────────┐"
+        },
+        "title",
+        {
+            "type": "custom",
+            "format": "\u001b[34m└─────────────────────────────────────────────────┘"
+        },
+        
+        // 颜色块
+        {
+            "type": "colors",
+            "paddingLeft": 3,
+            "block": {
+                "width": 3
+            }
+        },
+        
+        // 系统信息边框
+        {
+            "type": "custom",
+            "format": "\u001b[34m┌─────────────────────────────────────────────────┐"
+        },
+        
+        // OS 部分
+        {
+            "type": "custom",
+            "format": "\u001b[31m OS"
+        },
+        {
+            "type": "os",
+            "key": "\u001b[31m│ ├",
+            "format": "{2} {9}"
+        },
+        {
+            "type": "kernel",
+            "key": "\u001b[31m│ ├"
+        },
+        {
+            "type": "packages",
+            "key": "\u001b[31m│ ├"
+        },
+        {
+            "type": "shell",
+            "key": "\u001b[31m│ └"
+        },
+        
+        // 分隔符
+        {
+            "type": "custom",
+            "format": "\u001b[34m│"
+        },
+        
+        // DE/WM 部分
+        {
+            "type": "custom",
+            "format": "\u001b[32m DE/WM"
+        },
+        {
+            "type": "wm",
+            "key": "\u001b[32m│ ├"
+        },
+        {
+            "type": "wmtheme",
+            "key": "\u001b[32m│ ├"
+        },
+        {
+            "type": "icons",
+            "key": "\u001b[32m│ ├"
+        },
+        {
+            "type": "terminal",
+            "key": "\u001b[32m│ ├"
+        },
+        {
+            "type": "terminalfont",
+            "key": "\u001b[32m│ └"
+        },
+        
+        // 分隔符
+        {
+            "type": "custom",
+            "format": "\u001b[34m│"
+        },
+        
+        // 硬件部分
+        {
+            "type": "custom",
+            "format": "\u001b[33m PC"
+        },
+        {
+            "type": "host",
+            "key": "\u001b[33m│ ├"
+        },
+        {
+            "type": "cpu",
+            "key": "\u001b[33m│ ├",
+            "temp": true
+        },
+        {
+            "type": "gpu",
+            "key": "\u001b[33m│ ├",
+            "detectionMethod": "auto"
+        },
+        {
+            "type": "memory",
+            "key": "\u001b[33m│ ├"
+        },
+        {
+            "type": "uptime",
+            "key": "\u001b[33m│ ├"
+        },
+        {
+            "type": "display",
+            "key": "\u001b[33m│ └"
+        },
+        
+        // 底部边框
+        {
+            "type": "custom",
+            "format": "\u001b[34m└─────────────────────────────────────────────────┘"
+        },
+        
+        // 底部颜色块
+        "break",
+        {
+            "type": "colors",
+            "paddingLeft": 3,
+            "block": {
+                "width": 3
+            }
+        }
+    ]
+}
