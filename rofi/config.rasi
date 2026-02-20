@@ -5,9 +5,4 @@ configuration {
   modi: "window,drun,ssh,run,filebrowser";
 }
 
-//@theme "nord"
-
-//@theme "/home/lcg/.local/share/rofi/themes/rounded-green-dark.rasi"
-//@theme "~/.local/share/rofi/themes/squared-everforest.rasi"
-
-@theme "/home/xinghe/.local/share/rofi/themes/rounded-nord-dark.rasi"
+@theme "~/.config/rofi/catppuccin-frappe"

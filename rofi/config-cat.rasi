@@ -5,5 +5,4 @@ configuration {
   modi: "window,drun,ssh,run,filebrowser,file-browser-extended";
 }
 
-@theme "catppuccin-frappe"
-
+@theme "~/.config/rofi/catppuccin-frappe"
