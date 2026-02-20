@@ -2,7 +2,7 @@
   font-size: 14px;
   border: none;
   border-radius: 0;
-  font-family: FiraCodeNerdFont;
+  font-family: "FiraCode Nerd Font", "JetBrainsMono Nerd Font", "Noto Sans CJK SC", monospace;
   font-weight: bold;
   padding: 0;
   margin: 0;
@@ -31,6 +31,7 @@
   color: #d4be98;
   background: #32302f;
 }
+
 #workspaces button.active {
   margin-left: 3px;
   padding-left: 12px;
@@ -41,7 +42,7 @@
 }
 
 #workspaces button:hover {
-  color: @wb-hvr-fg;
+  color: rgba(0, 0, 0, 1);
   background: #d8a657;
 }
 
@@ -85,14 +86,17 @@
   background: #32302f;
   padding: 0 3 0 3;
 }
+
 #tray {
   margin-left: 16px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.5);
 }
+
 #taskbar {
   margin-right: 16px;
 }
+
 #taskbar button {
   box-shadow: none;
   text-shadow: none;
@@ -104,12 +108,12 @@
   padding-left: 3px;
   padding-right: 3px;
   margin-right: 0px;
-  color: @wb-color;
+  color: #d4be98;
 }
 
 #taskbar button.active {
-  background: @wb-act-bg;
-  color: @wb-act-color;
+  background: #d8a657;
+  color: rgba(0, 0, 0, 1);
   margin-left: 3px;
   padding-left: 12px;
   padding-right: 12px;

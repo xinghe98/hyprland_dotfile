@@ -22,6 +22,25 @@ print_warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
 print_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 print_step() { echo -e "${PURPLE}[STEP]${NC} $1"; }
 
+# 包安装包装函数，解决遇到错误或冲突导致脚本退出问题
+install_pacman() {
+    if ! sudo pacman -S --needed --noconfirm "$@"; then
+        print_warning "pacman 批量安装遇到问题，尝试逐个安装以跳过错误包..."
+        for pkg in "$@"; do
+            sudo pacman -S --needed --noconfirm "$pkg" || print_warning "包 $pkg 安装失败(可能未找到或有冲突)，已跳过"
+        done
+    fi
+}
+
+install_aur() {
+    if ! $AUR_HELPER -S --needed --noconfirm "$@"; then
+        print_warning "AUR 批量安装遇到问题，尝试逐个安装以跳过错误包..."
+        for pkg in "$@"; do
+            $AUR_HELPER -S --needed --noconfirm "$pkg" || print_warning "包 $pkg 安装失败(可能未找到或有冲突)，已跳过"
+        done
+    fi
+}
+
 # 检查是否为 Arch Linux
 check_arch() {
     if ! command -v pacman &> /dev/null; then
@@ -39,7 +58,7 @@ check_aur_helper() {
     else
         print_warning "未检测到 AUR 助手 (paru/yay)"
         print_info "正在安装 paru..."
-        sudo pacman -S --needed --noconfirm base-devel git
+        install_pacman base-devel git
         git clone https://aur.archlinux.org/paru.git /tmp/paru
         cd /tmp/paru && makepkg -si --noconfirm
         cd - > /dev/null
@@ -65,7 +84,7 @@ install_core() {
         qt6-wayland
     )
     
-    sudo pacman -S --needed --noconfirm "${core_packages[@]}"
+    install_pacman "${core_packages[@]}"
     print_success "核心组件安装完成"
 }
 
@@ -82,7 +101,7 @@ install_terminal() {
         zsh-syntax-highlighting
     )
     
-    sudo pacman -S --needed --noconfirm "${packages[@]}"
+    install_pacman "${packages[@]}"
     
     # 安装 oh-my-zsh (可选)
     if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
@@ -91,7 +110,7 @@ install_terminal() {
     fi
     
     # 安装 powerlevel10k
-    $AUR_HELPER -S --needed --noconfirm zsh-theme-powerlevel10k-git
+    install_aur zsh-theme-powerlevel10k-git
     
     print_success "终端和 Shell 安装完成"
 }
@@ -106,7 +125,7 @@ install_bar_notification() {
         libnotify
     )
     
-    sudo pacman -S --needed --noconfirm "${packages[@]}"
+    install_pacman "${packages[@]}"
     print_success "状态栏和通知系统安装完成"
 }
 
@@ -114,7 +133,7 @@ install_bar_notification() {
 install_launcher() {
     print_step "安装启动器..."
     
-    sudo pacman -S --needed --noconfirm rofi-wayland
+    install_pacman rofi-wayland
     
     print_success "启动器安装完成"
 }
@@ -123,7 +142,7 @@ install_launcher() {
 install_wallpaper() {
     print_step "安装壁纸和锁屏工具..."
     
-    $AUR_HELPER -S --needed --noconfirm swww hyprlock hypridle
+    install_aur swww hyprlock hypridle
     
     print_success "壁纸和锁屏工具安装完成"
 }
@@ -140,8 +159,8 @@ install_screenshot() {
         cliphist
     )
     
-    sudo pacman -S --needed --noconfirm "${packages[@]}"
-    $AUR_HELPER -S --needed --noconfirm grimshot
+    install_pacman "${packages[@]}"
+    install_aur grimshot
     
     print_success "截图和剪贴板工具安装完成"
 }
@@ -160,7 +179,7 @@ install_audio_brightness() {
         pamixer
     )
     
-    sudo pacman -S --needed --noconfirm "${packages[@]}"
+    install_pacman "${packages[@]}"
     
     # 启用 pipewire
     systemctl --user enable --now pipewire pipewire-pulse wireplumber
@@ -180,7 +199,7 @@ install_input_method() {
         fcitx5-configtool
     )
     
-    sudo pacman -S --needed --noconfirm "${packages[@]}"
+    install_pacman "${packages[@]}"
     print_success "中文输入法安装完成"
 }
 
@@ -188,7 +207,7 @@ install_input_method() {
 install_file_manager() {
     print_step "安装文件管理器..."
     
-    sudo pacman -S --needed --noconfirm yazi ffmpegthumbnailer
+    install_pacman yazi ffmpegthumbnailer
     
     print_success "文件管理器安装完成"
 }
@@ -197,7 +216,7 @@ install_file_manager() {
 install_polkit() {
     print_step "安装认证代理..."
     
-    sudo pacman -S --needed --noconfirm polkit-kde-agent
+    install_pacman polkit-kde-agent
     
     print_success "认证代理安装完成"
 }
@@ -231,10 +250,10 @@ install_utilities() {
         xhost
     )
     
-    sudo pacman -S --needed --noconfirm "${packages[@]}"
+    install_pacman "${packages[@]}"
     
     # 安装 keymapper (用于键位映射)
-    $AUR_HELPER -S --needed --noconfirm keymapper
+    install_aur keymapper
     
     print_success "实用工具安装完成"
 }
@@ -246,13 +265,13 @@ install_optional() {
     read -p "是否安装 Firefox? [Y/n] " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]] || [[ -z $REPLY ]]; then
-        sudo pacman -S --needed --noconfirm firefox
+        install_pacman firefox
     fi
     
     read -p "是否安装 VS Code? [Y/n] " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]] || [[ -z $REPLY ]]; then
-        $AUR_HELPER -S --needed --noconfirm visual-studio-code-bin
+        install_aur visual-studio-code-bin
     fi
     
     print_success "可选组件安装完成"
