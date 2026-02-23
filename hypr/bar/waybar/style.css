@@ -1,3 +1,5 @@
+@import "theme.css";
+
 * {
   font-size: 14px;
   border: none;
@@ -84,7 +86,7 @@
 #language,
 #custom-weather {
   background: #32302f;
-  padding: 0 3 0 3;
+  padding: 0 3px 0 3px;
 }
 
 #tray {
@@ -126,7 +128,7 @@
 #battery,
 #custom-notification {
   background: #3c3836;
-  padding: 0 3 0 3;
+  padding: 0 3px 0 3px;
 }
 
 /*

@@ -2,8 +2,14 @@
   "layer": "top",
   "position": "bottom",
   "height": 12,
-  "modules-left": ["hyprland/workspaces", "wlr/taskbar", "hyprland/window"],
-  "modules-center": ["clock"],
+  "modules-left": [
+    "hyprland/workspaces",
+    "taskbar",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock"
+  ],
   "modules-right": [
     "custom/arrow-light-on-bg-left",
     "network",
@@ -13,15 +19,15 @@
     "memory",
     "custom/arrow-light-on-dark-left",
     "temperature",
+    "custom/arrow-dark-on-light-left",
     "pulseaudio",
-    "tray",
+    "tray"
   ],
-
   "hyprland/workspaces": {
     "disable-scroll": true,
     "on-click": "activate",
     "all-outputs": true,
-    "active-only": true,
+    "active-only": false,
     "format": "{icon}",
     "format-icons": {
       "1": "",
@@ -46,8 +52,7 @@
       "8": [],
     },
   },
-
-  "wlr/taskbar": {
+  "taskbar": {
     "format": "{icon}",
     "rotate": 0,
     "icon-size": 18,
@@ -56,12 +61,14 @@
     "tooltip-format": "{title}",
     "on-click": "activate",
     "on-click-middle": "close",
-    "ignore-list": ["Alacritty", "kitty"],
+    "ignore-list": [
+      "Alacritty",
+      "kitty"
+    ],
     "app_ids-mapping": {
       "firefoxdeveloperedition": "firefox-developer-edition",
     },
   },
-
   "clock": {
     "format": " {:%H:%M}",
     "format-alt": "{:%A, %d %b, %Y}",
@@ -85,7 +92,6 @@
       "on-scroll-down": "shift_down",
     },
   },
-
   "pulseaudio": {
     "scroll-step": 1, // %, can be a float
     "format": "{icon} {volume}%",
@@ -101,13 +107,14 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": [""],
+      "default": [
+        ""
+      ],
     },
     "on-click": "pavucontrol",
     "on-click-right": "volumectl toggle-mute",
     "tooltip": false,
   },
-
   "network": {
     "interval": 1,
     "interface": "enp10s0", // (Optional) To force the use of this interface
@@ -119,14 +126,12 @@
     "format-disconnected": "⚠ Disconnected ",
     "on-click": "kitty -e iwctl",
   },
-
   "cpu": {
     "interval": 3,
     "format": "   {usage}%",
     "tooltip": false,
     "on-click": "kitty -e gotop",
   },
-
   "memory": {
     "interval": 3,
     "tooltip": false,
@@ -134,20 +139,25 @@
     "on-click": "kitty -e htop",
     "tooltip-format": "RAM: {used}GB/{total}GB\nSwap: {swapUsed}GB/{swapAvail}GB",
   },
-
   "temperature": {
     "tooltip": false,
     "critical-threshold": 80,
     "format": "{temperatureC}°{icon}",
-    "format-icons": [" ", "", " "],
+    "format-icons": [
+      " ",
+      "",
+      " "
+    ],
   },
-
   "backlight": {
     "tooltip": false,
     "format": "{percent}% {icon}",
-    "format-icons": ["󰃞 ", "󰃟 ", "󰃠 "],
+    "format-icons": [
+      "󰃞 ",
+      "󰃟 ",
+      "󰃠 "
+    ],
   },
-
   "battery#bat1": {
     "bat": "BAT0",
     "adapter": "AC",
@@ -163,9 +173,14 @@
     "format-plugged": " {capacity}%",
     "format-empty": " {capacity}%",
     "format-full": " {capacity}%",
-    "format-icons": ["", "", "", "", ""],
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
   },
-
   "battery#bat2": {
     "bat": "BAT1",
     "adapter": "AC",
@@ -181,14 +196,18 @@
     "format-plugged": " {capacity}%",
     "format-empty": " {capacity}%",
     "format-full": " {capacity}%",
-    "format-icons": ["", "", "", "", ""],
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
   },
-
   "sway/language": {
     "format": "{shortDescription}",
     "tooltip": false,
   },
-
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
@@ -209,39 +228,32 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true,
   },
-
   "tray": {
     "tooltip": false,
     "icon-size": 18,
     "rotate": 0,
     "spacing": 10,
   },
-
   "custom/arrow-light-on-bg-left": {
     "tooltip": false,
     "format": "",
   },
-
   "custom/arrow-dark-on-light-left": {
     "tooltip": false,
     "format": "",
   },
-
   "custom/arrow-light-on-dark-left": {
     "tooltip": false,
     "format": "",
   },
-
   "custom/arrow-light-on-bg-right": {
     "tooltip": false,
     "format": "",
   },
-
   "custom/arrow-dark-on-light-right": {
     "tooltip": false,
     "format": "",
   },
-
   "custom/arrow-light-on-dark-right": {
     "tooltip": false,
     "format": "",
