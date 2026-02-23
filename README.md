@@ -90,29 +90,6 @@ chmod +x install.sh
 ./install.sh
 ```
 
-### 手动安装
-
-如果你更喜欢手动安装：
-
-```bash
-# 1. 安装核心依赖
-sudo pacman -S hyprland xdg-desktop-portal-hyprland waybar kitty rofi-wayland dunst
-
-# 2. 安装 AUR 包
-paru -S swww hyprlock hypridle grimshot
-
-# 3. 备份现有配置
-mv ~/.config/hypr ~/.config/hypr.bak
-
-# 4. 链接配置
-ln -s ~/.dotfiles/hypr ~/.config/hypr
-ln -s ~/.dotfiles/kitty ~/.config/kitty
-ln -s ~/.dotfiles/rofi ~/.config/rofi
-# ... 其他配置
-```
-
----
-
 ## ⌨️ 快捷键
 
 ### 常用操作
@@ -154,7 +131,7 @@ ln -s ~/.dotfiles/rofi ~/.config/rofi
 | 快捷键              | 功能                    |
 | ------------------- | ----------------------- |
 | `SUPER + A`         | 区域截图 (保存)         |
-| `SUPER + SHIFT + S` | 区域截图 (复制到剪贴板) |
+| `SUPER + SHIFT + a` | 区域截图 (复制到剪贴板) |
 
 ### 其他
 
@@ -164,11 +141,6 @@ ln -s ~/.dotfiles/rofi ~/.config/rofi
 | `SUPER + V`              | 隐藏当前窗口   |
 | `SUPER + SHIFT + V`      | 显示隐藏的窗口 |
 | `SUPER + CTRL + ALT + P` | 电源菜单       |
-| `XF86AudioRaiseVolume`   | 音量增加       |
-| `XF86AudioLowerVolume`   | 音量减少       |
-| `XF86AudioMute`          | 静音切换       |
-| `XF86MonBrightnessUp`    | 亮度增加       |
-| `XF86MonBrightnessDown`  | 亮度减少       |
 
 ---
 
@@ -340,54 +312,6 @@ env = __GLX_VENDOR_LIBRARY_NAME,nvidia
 - noto-fonts-emoji
 
 </details>
-
----
-
-## ❓ 常见问题
-
-### 启动后黑屏
-
-1. 检查显示器配置是否正确
-2. 如果使用 NVIDIA，确保已配置环境变量
-3. 尝试在 TTY 中运行 `Hyprland > ~/.hyprland.log 2>&1` 查看日志
-
-### 中文输入法不工作
-
-1. 确保 fcitx5 已启动
-2. 运行 `fcitx5-configtool` 添加中文输入法
-3. 检查环境变量是否正确设置
-
-### 壁纸不显示
-
-1. 确保 swww 已安装：`paru -S swww`
-2. 检查 `hypr/images/` 目录下是否有图片
-3. 手动测试：`swww-daemon && swww img ~/.config/hypr/images/1.png`
-
-### 声音不工作
-
-1. 确保 PipeWire 正在运行：`systemctl --user status pipewire`
-2. 使用 `wpctl status` 检查音频设备
-3. 使用 `pavucontrol` 进行更详细的音频设置
-
----
-
-## 📝 更新日志
-
-### 2026-02-09
-
-- 更新至 Hyprland 0.53+ 语法
-- 更新 windowrule 为新格式
-- 添加壁纸自动轮换功能
-- 清理多余配置文件
-- 修复多处配置错误
-
----
-
-## 🙏 致谢
-
-- [Hyprland](https://hyprland.org/) - 优秀的 Wayland 合成器
-- [Arch Linux](https://archlinux.org/) - 最好的 Linux 发行版
-- 社区中分享配置的所有人
 
 ---
 
