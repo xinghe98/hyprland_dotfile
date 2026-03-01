@@ -170,12 +170,8 @@ install_audio_brightness() {
 
 	local packages=(
 		pipewire
-		pipewire-alsa
 		pipewire-pulse
-		pipewire-jack
 		wireplumber
-		brightnessctl
-		pamixer
 	)
 
 	install_pacman "${packages[@]}"
