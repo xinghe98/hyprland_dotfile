@@ -1,6 +1,6 @@
 #!/bin/bash
 # 随机壁纸轮换脚本
-# 使用 swww 实现带过渡动画的壁纸切换
+# 使用 swww/awww 实现带过渡动画的壁纸切换 (兼容 Arch swww -> awww 重命名)
 
 WALLPAPER_DIR="$HOME/.config/hypr/images"
 INTERVAL=1800  # 默认 30 分钟 (1800 秒)
@@ -48,16 +48,22 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# 检查 swww 是否安装
-if ! command -v swww &> /dev/null; then
-    echo "错误: swww 未安装。请先安装: paru -S swww 或 yay -S swww"
+# 兼容 swww -> awww 重命名 (Arch 0.12.1+ 包名为 awww，命令也改为 awww)
+if command -v awww &> /dev/null; then
+    SWWW_BIN="awww"
+    SWWW_DAEMON="awww-daemon"
+elif command -v swww &> /dev/null; then
+    SWWW_BIN="swww"
+    SWWW_DAEMON="swww-daemon"
+else
+    echo "错误: 未找到 swww/awww。请先安装: paru -S awww (或 swww) 或 yay -S awww"
     exit 1
 fi
 
-# 确保 swww-daemon 正在运行
-if ! pgrep -x "swww-daemon" > /dev/null; then
-    echo "启动 swww-daemon..."
-    swww-daemon &
+# 确保 daemon 正在运行
+if ! pgrep -x "$SWWW_DAEMON" > /dev/null && ! pgrep -x "swww-daemon" > /dev/null && ! pgrep -x "awww-daemon" > /dev/null; then
+    echo "启动 $SWWW_DAEMON..."
+    "$SWWW_DAEMON" &
     sleep 1
 fi
 
@@ -71,7 +77,7 @@ set_wallpaper() {
     local wallpaper="$1"
     if [[ -f "$wallpaper" ]]; then
         echo "[$(date '+%H:%M:%S')] 切换壁纸: $(basename "$wallpaper")"
-        swww img "$wallpaper" \
+        "$SWWW_BIN" img "$wallpaper" \
             --transition-type "$TRANSITION" \
             --transition-duration "$TRANSITION_DURATION" \
             --transition-fps 60
@@ -79,7 +85,7 @@ set_wallpaper() {
 }
 
 # 主循环
-echo "壁纸轮换已启动"
+echo "壁纸轮换已启动 ($SWWW_BIN)"
 echo "  目录: $WALLPAPER_DIR"
 echo "  间隔: ${INTERVAL}秒"
 echo "  过渡: $TRANSITION"

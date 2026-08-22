@@ -1,0 +1,8 @@
+# zsh 编译缓存
+zsh/.zcompdump
+zsh/.zcompdump.*
+.zcompdump
+.zcompdump.*
+# 备份文件
+*.bak
+*.bak.*

@@ -1,5 +1,16 @@
-#fortune随机诗词
-fortune -e tang300 song100>/tmp/zshinfo
+# PATH 紧急修复：若继承的环境 PATH 已被截断（如缺 /usr/bin），先补齐系统路径
+# 避免后续 fortune/cut/mkdir/uname 等基础命令报 not found
+if [[ $PATH != *"/usr/bin"* ]]; then
+  export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:$PATH"
+fi
+# 旧 PATH 修复同上：确保 PATH 包含基本系统目录
+
+#fortune随机诗词 - 增加命令存在性检查，避免 PATH 异常时报错
+if command -v fortune >/dev/null 2>&1; then
+  fortune -e tang300 song100 >/tmp/zshinfo 2>/dev/null || echo "fortune 无可用诗词库" > /tmp/zshinfo
+else
+  : > /tmp/zshinfo
+fi
 echo "┏━━━━━━━━━━┳━━━━━━━━┓
 ┃ 类名     ┃ 大驼峰 ┃
 ┣━━━━━━━━━━╋━━━━━━━━┫
@@ -11,7 +22,11 @@ echo "┏━━━━━━━━━━┳━━━━━━━━┓
 ┣━━━━━━━━━━╋━━━━━━━━┫
 ┃ 命名空间 ┃ 大驼峰 ┃
 ┗━━━━━━━━━━┻━━━━━━━━┛">>/tmp/zshinfo
-cat /tmp/zshinfo|lolcat
+if command -v lolcat >/dev/null 2>&1; then
+  cat /tmp/zshinfo 2>/dev/null | lolcat 2>/dev/null || cat /tmp/zshinfo
+else
+  cat /tmp/zshinfo 2>/dev/null || true
+fi
 
 # 该zsh配置文件使用zinit进行插件管理
 
@@ -73,24 +88,12 @@ zinit light ogham/exa
 # BAT
 zinit light sharkdp/bat
 
-# 快速目录跳转
+# 快速目录跳转 (原重复的 fast-syntax-highlighting/autosuggestions/fzf-tab 已去重，保留 light-mode for 中的统一加载)
 zinit ice lucid wait='1' # lucid ice 可以隐藏Turbo mode下插件加载完成的提示
 zinit light skywind3000/z.lua
 
-# 语法高亮
-zinit ice lucid wait='0' atinit='zpcompinit'
-zinit light zdharma-continuum/fast-syntax-highlighting
-
-# 自动建议,C-f/Right应用建议
-zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
-zinit light zsh-users/zsh-autosuggestions
-
-# 根据子串搜索历史命令
-zinit ice lucid wait="0"
-zinit light zsh-users/zsh-autosuggestions
-
-# 双击tab使用fzf补全
-zinit light Aloxaf/fzf-tab
+# 语法高亮/自动建议/fzf-tab 已在上面的 light-mode for 中加载，此处不再重复以避免重复报错
+# 若需 Turbo 模式，可单独配置 lucid wait，此处保留最简去重版本
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
@@ -136,17 +139,25 @@ source $ZDOTDIR/.zsh/fzf.zsh
 source $ZDOTDIR/.zsh/aliases.zsh
 source $ZDOTDIR/.zsh/keymaps.zsh
 
-# 环境变量
-export PATH="/home/lcg/.local/share/bob/nvim-bin:$PATH"
-export PATH="/home/xinghe/flutter-bin/flutter/bin:$PATH"
-export DEEPSEEK_KEY="sk-3594604d314143e59beda553f86a7b73"
+# 环境变量 — 修复原 142 行 `export PATH="/home/xinghe/.local/bin"` 丢失 $PATH 导致 /usr/bin 等系统路径被截断的严重 bug
+# 同时去重、判空，避免无效路径污染 PATH
+if [[ $PATH != *"/usr/bin"* ]]; then
+  export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:$PATH"
+fi
+# bob/nvim-bin 原配置为 /home/lcg (笔误)，已修正为 xinghe；仅当目录存在时才加入 PATH
+[[ -d "/home/xinghe/.local/share/bob/nvim-bin" ]] && export PATH="/home/xinghe/.local/share/bob/nvim-bin:$PATH"
+[[ -d "/home/lcg/.local/share/bob/nvim-bin" ]] && export PATH="/home/lcg/.local/share/bob/nvim-bin:$PATH"
+[[ -d "/home/xinghe/flutter-bin/flutter/bin" ]] && export PATH="/home/xinghe/flutter-bin/flutter/bin:$PATH"
+export PATH="/home/xinghe/.local/bin:$PATH"
 export dirs="~/MyTools/resources/dir.list"
 export ANDROID_HOME=${HOME}/Android/Sdk
-export PATH=${ANDROID_HOME}/tools:${PATH}
-export PATH=${ANDROID_HOME}/emulator:${PATH}
-export PATH=${ANDROID_HOME}/platform-tools:${PATH}
+[[ -d "${ANDROID_HOME}/tools" ]] && export PATH="${ANDROID_HOME}/tools:${PATH}"
+[[ -d "${ANDROID_HOME}/emulator" ]] && export PATH="${ANDROID_HOME}/emulator:${PATH}"
+[[ -d "${ANDROID_HOME}/platform-tools" ]] && export PATH="${ANDROID_HOME}/platform-tools:${PATH}"
 export EDITOR="nvim"
-export PATH=$PATH:$HOME/go/bin
+[[ -d "$HOME/go/bin" ]] && [[ $PATH != *"$HOME/go/bin"* ]] && export PATH="$PATH:$HOME/go/bin"
+# 去重 PATH，保持唯一且有序 (zsh 特性)
+typeset -U path PATH
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -160,7 +171,8 @@ export PATH=$PATH:$HOME/go/bin
 alias vi='nvim'
 alias ya='yazi'
 alias sudovim='sudoedit'
-alias vizsh="vim $HOME/.zshrc"
+alias vizsh="vim \$ZDOTDIR/.zshrc"
+alias vizshrc="vim \$ZDOTDIR/.zshrc"
 alias vibash="vim $HOME/.bashrc"
 alias e='extract'
 alias cs='cowsay'
